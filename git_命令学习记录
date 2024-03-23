@@ -1,0 +1,108 @@
+1.如何安装git？
+sudo apt-get install git
+
+2.如何创建版本库？
+mkdir <directory name>
+cd <directory name>
+git init //把这个目录变成git可以管理的仓库
+
+3.如何把工作区间的内容添加到暂存区？
+git add <file name>
+
+4.如何把暂存区的内容添加到版本库？
+git commit -m "提交时候的注释"
+
+5.如何查看工作区和暂存区的状态信息？
+git status
+
+6.如何查看工作区修改的内容？
+git diff <file name>
+
+7.如何查看提交日志？
+git log
+
+8.如何版本回退？
+git reset --hard HEAD^ //回退到上一个版本
+git reset --hard HEAD^^ //回退到上上一个版本
+git reset --hard <commit id> //回退到某一个版本
+
+	可以通过查看引用日志的方式来查看commit id：git reflog
+
+8.工作区，暂存区和版本库
+git add是把工作区的内容添加到暂存区，git commit是把暂存区的内容添加到版本库
+
+9.如何查看工作区和版本库里最新版本的区别？
+git diff HEAD -- <file name>
+
+10.如何丢弃工作区的修改?
+git checkout -- <file name>
+
+11.如何把暂存区的修改撤销掉重新放到工作区?
+git reset HEAD <file name>
+
+12.如何删除版本库中的文件?
+git rm <file name>
+git commit -m "提交时候的注释"
+
+13.如何把本地仓库和远程仓库相关联?
+
+git remote add origin git@github.com:zhouhailonglearn/practice.git
+
+git remote add 添加一个远程仓库
+origin 是给远程仓库起的一个别名
+git@github.com:zhouhailonglearn/practice.git 是远程仓库的地址
+
+14.如何把本地库的所有内容推送到远程库上?
+git push -u origin master
+
+git push 将本地的提交推送到远程仓库
+-u 参数是指定将本地的 master 分支与远程仓库的 master 分支关联起来（即设置跟踪），以后可以简化 push 和 pull 操作
+origin 是远程仓库的别名
+master 是本地分支名
+
+15.如何删除远程仓库？
+git remote //查看远程仓库
+git remote -v //查看远程仓库的详细信息
+
+git remote rm <仓库名字> //这其实只是解除了本地仓库和远程仓库的绑定关系
+
+16.如何进行仓库克隆？
+git clone  <仓库地址>
+
+17.关于分支：
+a.创建分支：git branch <branch name>   
+b.删除分支: git branch -d <branch name>
+c.切换分支: git checkout <branch name>
+d.查看分支: git branch
+e.合并分支: git merge <branch name> //将<branch name>合并到当前分支
+
+18.如何解决分支合并冲突？
+merge之后，手动修改冲突的文件，然后提交；
+使用git log --graph查看分支合并图
+
+19.如何保护现场，也就是保护工作区和暂存区的内容？
+a.存储当前的工作现场
+	git stash
+b.查看暂存状态列表
+	git stash list
+c.恢复现场
+	git stash pop <status name>
+
+20.复制一个特定的提交当当前分支
+git cherry-pick <commit id>
+
+21.打标签
+git tag <tag name>  //给分支的最新提交打标签
+git tag <tag name> <commit id>  //给分支的某一个提交打上标签
+git tag //查看标签
+git show <tag name> //查看标签信息
+git tag -a v0.1 -m "version 0.1 released" 1094adb //-a指定标签名，-m指定说明文字
+git tag -d <tag name> //删除标签
+git push origin <tagname> //推送某个标签到远程
+git push origin --tags //一次性推送尚未推送到远程的本地标签
+
+22.删除远程tag
+1.先删除本地tag：git tag -d <tagname>
+2.删除远程tag：git push origin :refs/tags/<tagname>
+
+
